@@ -8,7 +8,6 @@ dotenv.config();
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
-const baseBranch = process.env.BASE_BRANCH || "origin/main";
 
 async function main() {
     const prompt = fs.readFileSync("prompts/review.md", "utf-8");
@@ -21,7 +20,6 @@ async function main() {
 
     const review = await reviewDiff(prompt, diff);
 
-    console.log("\n=== AI Pull Request Review ===\n");
     console.log(review)
 }
 
@@ -36,8 +34,6 @@ function getDiff() {
         process.env.BASE_SHA && process.env.HEAD_SHA 
             ? `git diff ${process.env.BASE_SHA} ${process.env.HEAD_SHA}`
             : `git diff ${baseBranch}...HEAD`
-
-    console.log(`Using diff command: ${diffCommand}`);
 
     try {
         return execSync(diffCommand, {
