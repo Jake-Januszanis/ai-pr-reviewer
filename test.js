@@ -5,5 +5,6 @@ function divide(a,b) {
     if (!b) return
     let result;
     result = a / b;
+    if (!result) return;
     if (result) return result
 }
