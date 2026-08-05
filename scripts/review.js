@@ -12,7 +12,7 @@ const baseBranch = process.env.BASE_BRANCH || "origin/main";
 
 async function main() {
     const prompt = fs.readFileSync("prompts/review.md", "utf-8");
-    const diff = getDIff();
+    const diff = getDiff();
 
     if (!diff.trim()) {
         console.log("No changes found to review.");
@@ -21,6 +21,7 @@ async function main() {
 
     const review = await reviewDiff(prompt, diff);
 
+    console.log("\n=== AI Pull Request Review ===\n");
     console.log(review)
 }
 
