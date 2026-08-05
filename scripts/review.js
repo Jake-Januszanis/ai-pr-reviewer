@@ -19,6 +19,8 @@ async function main() {
         return;
     }
 
+    const review = await reviewDiff(prompt, diff);
+
     await postCommentOnPR(review);
 }
 
