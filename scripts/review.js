@@ -12,21 +12,17 @@ const baseBranch = process.env.BASE_BRANCH || "origin/main";
 
 async function main() {
     const prompt = fs.readFileSync("prompts/review.md", "utf-8");
-    const diff = getDIff();
+    const diff = getDiff();
 
     if (!diff.trim()) {
         console.log("No changes found to review.");
         return;
     }
 
-    const response = await client.responses.create({
-        model: process.env.OPENAI_MODEL || "gpt-5-mini",
-        input: [
-            { role: "system", content: prompt },
-            { role: "user", content: diff}
-        ]
-    })
-    console.log(response.output_text)
+    const review = await reviewDiff(prompt, diff);
+
+    console.log("\n=== AI Pull Request Review ===\n");
+    console.log(review)
 }
 
 main().catch(console.error);
@@ -51,4 +47,17 @@ function getDiff() {
         throw new Error(`Failed to generate git diff using "${diffCommand}": ${error.message}`);
     }
 
+}
+
+async function reviewDiff(prompt, diff) {
+
+    const response = await client.responses.create({
+        model: process.env.OPENAI_MODEL || "gpt-5-mini",
+        input: [
+            { role: "system", content: prompt },
+            { role: "user", content: diff}
+        ]
+    })
+
+    return response.output_text;
 }
