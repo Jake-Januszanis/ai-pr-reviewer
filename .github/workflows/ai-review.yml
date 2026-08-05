@@ -7,6 +7,11 @@ on:
       - synchronize
       - reopened
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
 jobs:
   review:
     runs-on: ubuntu-latest
@@ -34,3 +39,6 @@ jobs:
           OPENAI_MODEL: gpt-5-mini
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
