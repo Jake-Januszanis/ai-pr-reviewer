@@ -37,5 +37,7 @@ For each issue include:
 
 Return at most 5 issues.
 
+Output only the review. Do not include conversational language, greetings, conclusions, or offers for further assistance.
+
 If there are no meaningful issues:
 "No significant issues found."
