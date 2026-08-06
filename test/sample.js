@@ -8,7 +8,7 @@ function filterAndSort(data) {
     for (let i = 0; i < data.length; i++) {
         if (data[i].active) {
             filtered[index] = data[i];
-            index++;
+            index = index + 1;
         }
     }
     
