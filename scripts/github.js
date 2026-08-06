@@ -91,10 +91,16 @@ function findAIComment(comments) {
 }
 
 function getGitHubConfig() {
+    if (!process.env.GITHUB_REPOSITORY) {
+        throw new Error("GITHUB_REPOSITORY environment variable is required.");
+    }
+
+    const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
+
     return {
         githubToken: process.env.GITHUB_TOKEN,
         prNumber: process.env.PR_NUMBER,
-        owner: process.env.GITHUB_REPOSITORY.split("/")[0],
-        repo: process.env.GITHUB_REPOSITORY.split("/")[1]
+        owner,
+        repo
     };
 }
