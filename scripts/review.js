@@ -2,7 +2,7 @@ import fs from "fs";
 import { execSync } from "child_process";
 import dotenv from 'dotenv';
 import OpenAI from "openai";
-import { postCommentOnPR } from "./github.js";
+import { publishPRReview } from "./github.js";
 
 dotenv.config();
 
@@ -20,8 +20,7 @@ async function main() {
     }
 
     const review = await reviewDiff(prompt, diff);
-
-    await postCommentOnPR(review);
+    await publishPRReview(review);
 }
 
 main().catch(console.error);

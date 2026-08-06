@@ -1,9 +1,19 @@
 
-export async function postCommentOnPR(review) {
+export async function publishPRReview(review) {
 
-    const githubToken = process.env.GITHUB_TOKEN;
-    const prNumber = process.env.PR_NUMBER;
-    const [owner, repo] = process.env.GITHUB_REPOSITORY.split("/");
+    const comments = await getPRComments();
+    const aiComment = findAIComment(comments);
+    
+    if (aiComment) {
+        await updatePRComment(aiComment.id, review)
+    } else {
+        await createPRComment(review)
+    }
+
+}
+
+export async function createPRComment(review) {
+    const { githubToken, prNumber, owner, repo } = getGitHubConfig();
 
     const url = `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`
 
@@ -23,4 +33,68 @@ export async function postCommentOnPR(review) {
         const error = await response.json();
         throw new Error(`Failed to post comment on PR: ${error.message}`);
     }
+
+}
+
+export async function updatePRComment(commentId, review){
+    const { githubToken, prNumber, owner, repo } = getGitHubConfig();
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues/comments/${commentId}`;
+
+    const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+            "Authorization": `Bearer ${githubToken}`,
+            "Accept": "application/vnd.github+json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            body: review
+        })
+    })
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`Failed to update comment on PR: ${error.message}`);
+    }
+
+}
+
+
+
+export async function getPRComments() {
+    const { githubToken, prNumber, owner, repo } = getGitHubConfig();
+
+    const url = `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`;
+
+    const response = await fetch(url, {
+        headers: {
+            "Authorization": `Bearer ${githubToken}`,
+            "Content-Type": "application/json"
+        }
+    })
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`Failed to retrieve PR comments: ${error.message}`);
+    }
+
+    return await response.json();
+
+}
+
+
+function findAIComment(comments) {
+    return comments.find((comment) => {
+        return comment.user.login === "github-actions[bot]"
+    })
+}
+
+function getGitHubConfig() {
+    return {
+        githubToken: process.env.GITHUB_TOKEN,
+        prNumber: process.env.PR_NUMBER,
+        owner: process.env.GITHUB_REPOSITORY.split("/")[0],
+        repo: process.env.GITHUB_REPOSITORY.split("/")[1]
+    };
 }
