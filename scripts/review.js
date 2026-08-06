@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import { postCommentOnPR } from "./github.js";
 
 dotenv.config();
-
+// Testing 
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
