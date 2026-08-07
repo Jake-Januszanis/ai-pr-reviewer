@@ -1,4 +1,6 @@
 
+const COMMENT_MARKER = "<!-- AI_PR_REVIEW -->"; // Hidden marker to identify the AI-generated comment
+
 export async function publishPRReview(review) {
 
     const comments = await getPRComments();
@@ -14,8 +16,9 @@ export async function publishPRReview(review) {
 
 export async function createPRComment(review) {
     const { githubToken, prNumber, owner, repo } = getGitHubConfig();
-
+    
     const url = `https://api.github.com/repos/${owner}/${repo}/issues/${prNumber}/comments`
+    const commentBody = `${COMMENT_MARKER}\n\n${review}`;
 
     const response = await fetch(url, {
         method: "POST",
@@ -25,7 +28,7 @@ export async function createPRComment(review) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            body: review
+            body: commentBody
         })
     })
 
@@ -40,6 +43,7 @@ export async function updatePRComment(commentId, review){
     const { githubToken, prNumber, owner, repo } = getGitHubConfig();
 
     const url = `https://api.github.com/repos/${owner}/${repo}/issues/comments/${commentId}`;
+    const commentBody = `${COMMENT_MARKER}\n\n${review}`;
 
     const response = await fetch(url, {
         method: "PATCH",
@@ -49,7 +53,7 @@ export async function updatePRComment(commentId, review){
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            body: review
+            body: commentBody
         })
     })
 
@@ -86,7 +90,9 @@ export async function getPRComments() {
 
 function findAIComment(comments) {
     return comments.find((comment) => {
-        return comment.user.login === "github-actions[bot]"
+        return comment.user.login === "github-actions[bot]" &&
+        typeof comment.body === "string" &&
+        comment.body.includes(COMMENT_MARKER)
     })
 }
 
