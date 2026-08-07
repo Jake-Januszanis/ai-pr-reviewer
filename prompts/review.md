@@ -59,6 +59,12 @@ Otherwise, list each issue using the following format:
 <!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
 
+Found **3** potential issues.
+
+- 🔴 High: 0
+- 🟡 Medium: 2
+- 🔵 Low: 1
+
 ## 🟡 Medium
 
 **Title:** Missing validation
