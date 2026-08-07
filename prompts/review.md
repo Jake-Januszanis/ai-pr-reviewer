@@ -65,11 +65,11 @@ Repeat the severity heading for every issue, even when multiple issues share the
 <!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
 
-Found **<TOTAL>** potential issues.
+Found **`<TOTAL>`** potential issues.
 
- 🔴 High: <HIGH_COUNT>
- 🟡 Medium: <MEDIUM_COUNT>
- 🔵 Low: <LOW_COUNT>
+ 🔴 High: ` <HIGH_COUNT>`
+ 🟡 Medium: `<MEDIUM_COUNT>`
+ 🔵 Low: `<LOW_COUNT>`
 
 ## 🟡 Medium
 
@@ -85,6 +85,6 @@ Found **<TOTAL>** potential issues.
 
 ```js
 if (!process.env.GITHUB_TOKEN) {
-    throw new Error(...);
+    throw new Error('GITHUB_TOKEN is required');
 }
 ```
