@@ -61,9 +61,9 @@ Otherwise, list each issue using the following format:
 
 Found **<TOTAL>** potential issues.
 
-- 🔴 High: <HIGH_COUNT>
-- 🟡 Medium: <MEDIUM_COUNT>
-- 🔵 Low: <LOW_COUNT>
+ 🔴 High: <HIGH_COUNT>
+ 🟡 Medium: <MEDIUM_COUNT>
+ 🔵 Low: <LOW_COUNT>
 
 ## 🟡 Medium
 
@@ -82,3 +82,4 @@ if (!process.env.GITHUB_TOKEN) {
     throw new Error(...);
 }
 ```
+
