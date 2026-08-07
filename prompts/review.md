@@ -67,7 +67,7 @@ Repeat the severity heading for every issue, even when multiple issues share the
 
 Found **`<TOTAL>`** potential issues.
 
- 🔴 High: ` <HIGH_COUNT>`
+ 🔴 High: `<HIGH_COUNT>`
  🟡 Medium: `<MEDIUM_COUNT>`
  🔵 Low: `<LOW_COUNT>`
 
