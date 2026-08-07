@@ -16,3 +16,16 @@ function filterAndSort(data) {
     
     if (filtered) return filtered;
 }
+
+function sumActiveScores(items) {
+    let total = 0;
+
+    for (let i = 0; i < items.length; i++) {
+        if (!items[i].active) continue;
+        if (typeof items[i].score !== "number") continue;
+        total += items[i].score;
+    }
+
+    if (total) return total;
+    return 0;
+}
