@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import { publishPRReview } from "./github.js";
 
 dotenv.config();
-// Test comment to trigger PR review
+
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
