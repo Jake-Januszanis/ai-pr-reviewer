@@ -54,7 +54,13 @@ If no actionable issues are found, output:
 
 ✅ No actionable issues identified.
 
-Otherwise, list each issue using the following format:
+Otherwise, list each issue using the following format for each issue:
+
+Each reported issue should use the following structure.
+
+Do not group multiple issues under a single severity heading.
+
+Repeat the severity heading for every issue, even when multiple issues share the same severity.
 
 <!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
@@ -82,4 +88,3 @@ if (!process.env.GITHUB_TOKEN) {
     throw new Error(...);
 }
 ```
-
