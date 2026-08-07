@@ -59,11 +59,11 @@ Otherwise, list each issue using the following format:
 <!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
 
-Found **3** potential issues.
+Found **<TOTAL>** potential issues.
 
-- 🔴 High: 0
-- 🟡 Medium: 2
-- 🔵 Low: 1
+- 🔴 High: <HIGH_COUNT>
+- 🟡 Medium: <MEDIUM_COUNT>
+- 🔵 Low: <LOW_COUNT>
 
 ## 🟡 Medium
 
