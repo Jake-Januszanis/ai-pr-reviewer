@@ -91,6 +91,7 @@ export async function getPRComments() {
 function findAIComment(comments) {
     return comments.find((comment) => {
         return comment.user.login === "github-actions[bot]" &&
+        typeof comment.body === "string" &&
         comment.body.includes(COMMENT_MARKER)
     })
 }
