@@ -52,7 +52,7 @@ Begin with the following heading:
 
 If no actionable issues are found, output:
 
-✅ No actionable issues were identified in this pull request.
+✅ No actionable issues identified.
 
 Otherwise, list each issue using the following format:
 
