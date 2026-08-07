@@ -47,7 +47,6 @@ Format your response as GitHub Markdown.
 
 Begin with the following heading:
 
-<!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
 
 If no actionable issues are found, output:
@@ -62,7 +61,6 @@ Do not group multiple issues under a single severity heading.
 
 Repeat the severity heading for every issue, even when multiple issues share the same severity.
 
-<!-- AI_PR_REVIEW -->
 # 🤖 AI Pull Request Review
 
 Found **`<TOTAL>`** potential issues.
